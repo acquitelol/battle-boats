@@ -74,7 +74,7 @@ class Game {
                 Console.Write($"\nEnter coordinates for boat {i + 1} (e.g. A1) -> ");
 
                 if (!ValidateCoordinates(Console.ReadLine() ?? "<>", out int row, out int col)) {
-                    Console.WriteLine("Invalid coordinates. Use letter A-H followed by number 1-8");
+                    Console.WriteLine($"Invalid coordinates. Use letter A-{(char)('A' + Config.GRID_SIZE - 1)} followed by number 1-8");
                     continue;
                 }
 
@@ -108,7 +108,7 @@ class Game {
             Console.Write("\nEnter target coordinates (e.g. A1) -> ");
 
             if (!ValidateCoordinates(Console.ReadLine() ?? "<>", out int row, out int col)) {
-                Console.WriteLine($"Invalid coordinates. Use letter A-H followed by number 1-{Config.GRID_SIZE}");
+                Console.WriteLine($"Invalid coordinates. Use letter A-{(char)('A' + Config.GRID_SIZE - 1)} followed by number 1-{Config.GRID_SIZE}");
                 continue;
             }
 
@@ -158,7 +158,7 @@ class Game {
             return false;
 
         char rowChar = char.ToUpper(coord[0]);
-        if (!char.IsLetter(rowChar) || rowChar < 'A' || rowChar > 'H')
+        if (!char.IsLetter(rowChar) || rowChar < 'A' || rowChar > ('A' + Config.GRID_SIZE - 1))
             return false;
 
         if (!int.TryParse(coord[1].ToString(), out int colNum) || colNum < 1 || colNum > 8)
