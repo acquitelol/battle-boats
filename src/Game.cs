@@ -27,6 +27,7 @@ class Game {
 
     private static void PlayGame(bool resuming) {
         if (!resuming) {
+            state.Clear();
             PlacePlayerBoats();
             PlaceComputerBoats();
         }
