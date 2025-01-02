@@ -1,4 +1,4 @@
-public enum GridKind : int {
+public enum GridKind : Byte {
     Player = 0,
     Computer = 1,
     Tracker = 2,

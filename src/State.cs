@@ -47,7 +47,7 @@ class SaveManager {
     }
 
     private void WriteGrid(BinaryWriter writer, Grid grid) {
-        writer.Write((int)grid.kind);
+        writer.Write((Byte)grid.kind);
 
         for (int row = 0; row < Config.GRID_SIZE; ++row)
             for (int col = 0; col < Config.GRID_SIZE; ++col)
@@ -55,7 +55,7 @@ class SaveManager {
     }
 
     private Grid ReadGrid(BinaryReader reader) {
-        Grid grid = new((GridKind)reader.ReadInt32());
+        Grid grid = new((GridKind)reader.ReadByte());
 
         for (int row = 0; row < Config.GRID_SIZE; ++row)
             for (int col = 0; col < Config.GRID_SIZE; ++col)
