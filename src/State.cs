@@ -1,9 +1,9 @@
 using System.Reflection;
 
 class GameState {
-    public Grid playerFleet = new();
-    public Grid computerFleet = new();
-    public Grid targetTracker = new();
+    public Grid playerFleet = new(GridKind.Player);
+    public Grid computerFleet = new(GridKind.Computer);
+    public Grid targetTracker = new(GridKind.Tracker);
 
     public void Clear() {
         playerFleet.Clear();
@@ -47,13 +47,15 @@ class SaveManager {
     }
 
     private void WriteGrid(BinaryWriter writer, Grid grid) {
+        writer.Write((int)grid.kind);
+
         for (int row = 0; row < Config.GRID_SIZE; ++row)
             for (int col = 0; col < Config.GRID_SIZE; ++col)
                 writer.Write(grid[row, col]);
     }
 
     private Grid ReadGrid(BinaryReader reader) {
-        Grid grid = new();
+        Grid grid = new((GridKind)reader.ReadInt32());
 
         for (int row = 0; row < Config.GRID_SIZE; ++row)
             for (int col = 0; col < Config.GRID_SIZE; ++col)

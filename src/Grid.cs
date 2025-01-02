@@ -1,7 +1,18 @@
+public enum GridKind : int {
+    Player = 0,
+    Computer = 1,
+    Tracker = 2,
+}
+
 public class Grid {
     private char[,] grid = new char[Config.GRID_SIZE, Config.GRID_SIZE].Fill('-');
+    public GridKind kind { get; }
 
-    public void Print(bool computer) {
+    public Grid(GridKind kind) {
+        this.kind = kind;
+    }
+
+    public void Print() {
         if (grid.GetLength(1).ToString().Length > 1) {
             Console.Write("  ");
             for (int col = 1; col <= grid.GetLength(1); ++col) {
@@ -17,15 +28,16 @@ public class Grid {
             Console.Write(digit + " ");
         }
         Console.WriteLine();
+        bool isComputer = kind == GridKind.Computer;
 
         for (int i = 0; i < grid.GetLength(0); ++i) {
             Console.Write($"{(char)('A' + i)} ");
 
             for (int j = 0; j < grid.GetLength(1); ++j) {
                 if (grid[i, j] == 'H')
-                    Console.ForegroundColor = computer ? ConsoleColor.Green : ConsoleColor.Red;
+                    Console.ForegroundColor = isComputer ? ConsoleColor.Green : ConsoleColor.Red;
                 else if (grid[i, j] == 'M')
-                    Console.ForegroundColor = computer ? ConsoleColor.Red : ConsoleColor.Green;
+                    Console.ForegroundColor = isComputer ? ConsoleColor.Red : ConsoleColor.Green;
                 else if (grid[i, j] == 'B')
                     Console.ForegroundColor = ConsoleColor.Blue;
                 else

@@ -33,9 +33,9 @@ class Game {
 
         for (;;) {
             Console.WriteLine("\nYour target tracker:");
-            state.targetTracker.Print(true);
+            state.targetTracker.Print();
             Console.WriteLine("\nYour fleet:");
-            state.playerFleet.Print(false);
+            state.playerFleet.Print();
 
             PlayerTurn();
             if (state.targetTracker.CheckWinner()) {
@@ -46,7 +46,7 @@ class Game {
             ComputerTurn();
             if (state.playerFleet.CheckWinner()) {
                 Console.WriteLine("\nGame Over! Computer wins!");
-                state.computerFleet.Print(true);
+                state.computerFleet.Print();
                 break;
             }
 
@@ -68,7 +68,7 @@ class Game {
         Console.WriteLine("\nPlace your fleet:");
 
         for (int i = 0; i < Config.BOAT_COUNT; ++i) {
-            state.playerFleet.Print(false);
+            state.playerFleet.Print();
 
             for (;;) {
                 Console.Write($"\nEnter coordinates for boat {i + 1} (e.g. A1) -> ");
@@ -84,7 +84,6 @@ class Game {
                 }
 
                 state.playerFleet[row, col] = 'B';
-                manager.Save(state);
                 break;
             }
         }
@@ -102,8 +101,6 @@ class Game {
                 ++placed;
             }
         }
-
-        manager.Save(state);
     }
 
     private static void PlayerTurn() {
